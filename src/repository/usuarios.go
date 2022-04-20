@@ -3,6 +3,7 @@ package repository
 import (
 	"api/src/models"
 	"database/sql"
+	"fmt"
 )
 
 type usuarios struct {
@@ -13,26 +14,22 @@ func NovoRepositorioDeUsuarios(db *sql.DB) *usuarios {
 	return &usuarios{db}
 }
 
-func (repositorio usuarios) Criar(usuario models.Usuario) (uint64, error) {
+func (repositorio usuarios) Criar(usuario models.Usuario) error {
+	fmt.Println(usuario)
 	statement, erro := repositorio.db.Prepare(
 		"insert into usuarios (nome, nick, email, senha) values ($1, $2, $3, $4)",
 	)
 
 	if erro != nil {
-		return 0, erro
+		return erro
 	}
 	defer statement.Close()
 
-	resultado, erro := statement.Exec(usuario.Nome, usuario.Nick, usuario.Email, usuario.Senha)
+	_, err := statement.Exec(usuario.Nome, usuario.Nick, usuario.Email, usuario.Senha)
 
-	if erro != nil {
-		return 0, erro
+	if err != nil {
+		return err
 	}
 
-	ultimoIDInserido, erro := resultado.LastInsertId()
-	if erro != nil {
-		return 0, erro
-	}
-
-	return uint64(ultimoIDInserido), nil
+	return nil
 }
