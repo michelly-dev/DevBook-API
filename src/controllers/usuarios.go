@@ -6,7 +6,6 @@ import (
 	"api/src/repository"
 	"api/src/respostas"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strconv"
@@ -53,7 +52,7 @@ func CriarUsuario(w http.ResponseWriter, r *http.Request) {
 
 	respostas.JSON(w, http.StatusCreated, usuario)
 
-	w.Write([]byte(fmt.Sprintf("Usuário inserido")))
+	// w.Write([]byte(fmt.Sprintf("Usuário inserido")))
 }
 
 func BuscarUsuarios(w http.ResponseWriter, r *http.Request) {
