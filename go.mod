@@ -8,4 +8,5 @@ require (
 	github.com/badoux/checkmail v1.2.1 // indirect
 	github.com/joho/godotenv v1.4.0 // indirect
 	github.com/lib/pq v1.10.5 // indirect
+	golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4 // indirect
 )
